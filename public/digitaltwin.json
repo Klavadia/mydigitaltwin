@@ -1,0 +1,346 @@
+{
+  "personal": {
+    "name": "Your Full Name",
+    "title": "Senior Software Engineer",
+    "location": "Melbourne, Australia",
+    "summary": "Passionate software engineer with 5+ years building scalable applications and leading technical teams to deliver high-impact solutions.",
+    "elevator_pitch": "I transform complex business challenges into elegant technical solutions, specializing in full-stack development with a focus on performance optimization and team leadership.",
+    "contact": {
+      "email": "your.email@example.com",
+      "linkedin": "https://linkedin.com/in/yourprofile",
+      "github": "https://github.com/yourusername",
+      "portfolio": "https://yourportfolio.com"
+    }
+  },
+  "salary_location": {
+    "current_salary": "$85,000 - $95,000 AUD",
+    "salary_expectations": "$95,000 - $110,000 AUD based on role complexity",
+    "location_preferences": ["Melbourne CBD", "Remote", "Hybrid"],
+    "relocation_willing": true,
+    "remote_experience": "3+ years remote collaboration experience",
+    "travel_availability": "Available for interstate travel up to 25%",
+    "work_authorization": "Australian Citizen / Permanent Resident"
+  },
+  "experience": [
+    {
+      "company": "TechCorp Australia",
+      "title": "Senior Software Engineer",
+      "duration": "Jan 2021 - Present (3.5 years)",
+      "company_context": "200+ employee fintech startup, Series B funding",
+      "team_structure": "Engineering team of 25, direct reports: 3 junior developers",
+      "achievements_star": [
+        {
+          "situation": "Legacy monolith causing 3-second page load times affecting user retention",
+          "task": "Lead architectural redesign to improve performance",
+          "action": "Implemented microservices architecture using Docker, Kubernetes, and Redis caching",
+          "result": "Reduced load times by 40% to 1.8s, increased user retention by 15%, saved $50K annually in server costs"
+        },
+        {
+          "situation": "Manual deployment process taking 4 hours with frequent errors",
+          "task": "Automate deployment pipeline for faster releases",
+          "action": "Built CI/CD pipeline with GitHub Actions, automated testing, and deployment to AWS",
+          "result": "Reduced deployment time to 15 minutes, zero-downtime deployments, 50% reduction in production bugs"
+        }
+      ],
+      "technical_skills_used": ["Python", "AWS (EC2, RDS, S3)", "Docker", "Kubernetes", "PostgreSQL", "Redis"],
+      "leadership_examples": ["Mentored 3 junior developers", "Led code review processes", "Coordinated with product and design teams"],
+      "budget_managed": "$300K annual infrastructure budget",
+      "team_size_managed": 5
+    },
+    {
+      "company": "Digital Solutions Ltd",
+      "title": "Software Engineer",
+      "duration": "Mar 2019 - Dec 2020 (1.75 years)",
+      "company_context": "Mid-size consultancy, 50 employees",
+      "team_structure": "Development team of 8",
+      "achievements_star": [
+        {
+          "situation": "Client needed mobile app with tight 3-month deadline",
+          "task": "Develop cross-platform mobile application",
+          "action": "Built React Native app with backend API integration, implemented real-time notifications",
+          "result": "Delivered 2 weeks early, app achieved 4.7-star rating with 10K+ downloads in first month"
+        }
+      ],
+      "technical_skills_used": ["React Native", "Node.js", "MongoDB", "Firebase"],
+      "leadership_examples": ["Trained 2 team members on React Native best practices"],
+      "budget_managed": "N/A",
+      "team_size_managed": 2
+    }
+  ],
+  "skills": {
+    "technical": {
+      "programming_languages": [
+        {"language": "Python", "years": 5, "proficiency": "Expert", "frameworks": ["Django", "FastAPI", "Flask"]},
+        {"language": "JavaScript", "years": 4, "proficiency": "Advanced", "frameworks": ["React", "Node.js", "TypeScript", "Next.js"]},
+        {"language": "SQL", "years": 5, "proficiency": "Advanced", "frameworks": ["PostgreSQL", "MySQL"]}
+      ],
+      "databases": [
+        "PostgreSQL (5 years)", 
+        "MongoDB (3 years)", 
+        "Redis (2 years)",
+        "MySQL (4 years)"
+      ],
+      "cloud_platforms": [
+        "AWS (4 years) - EC2, RDS, S3, Lambda, CloudWatch", 
+        "Docker (3 years)", 
+        "Kubernetes (2 years)",
+        "GitHub Actions (2 years)"
+      ],
+      "ai_ml": [
+        "RAG systems", 
+        "Vector databases", 
+        "LLM integration", 
+        "OpenAI API",
+        "Upstash Vector"
+      ]
+    },
+    "soft_skills": [
+      "Technical Leadership", 
+      "Cross-functional Collaboration", 
+      "Mentoring", 
+      "Problem-solving", 
+      "Agile/Scrum",
+      "Clear Communication",
+      "Stakeholder Management"
+    ],
+    "certifications": [
+      "AWS Solutions Architect Associate (expires 2025)", 
+      "Certified Scrum Master (2023)"
+    ]
+  },
+  "education": {
+    "university": "University of Melbourne",
+    "degree": "Bachelor of Computer Science",
+    "graduation_year": 2019,
+    "gpa": "3.7/4.0 (High Distinction)",
+    "relevant_coursework": [
+      "Data Structures", 
+      "Algorithms", 
+      "Database Systems", 
+      "Machine Learning",
+      "Software Engineering"
+    ],
+    "thesis_project": "Predictive Analytics for E-commerce Recommendations using Machine Learning"
+  },
+  "projects_portfolio": [
+    {
+      "name": "AI-Powered Digital Twin Workshop Platform",
+      "description": "End-to-end RAG system for interview preparation with MCP server integration",
+      "technologies": ["Python", "Upstash Vector", "Groq API", "Next.js", "TypeScript"],
+      "impact": "Helped 100+ professionals improve interview performance",
+      "github_url": "https://github.com/username/digital-twin",
+      "live_demo": "https://mydigitaltwin.vercel.app"
+    },
+    {
+      "name": "E-commerce Analytics Dashboard",
+      "description": "Real-time analytics platform for tracking sales and customer behavior",
+      "technologies": ["React", "Node.js", "PostgreSQL", "Redis", "Chart.js"],
+      "impact": "Reduced decision-making time by 60% for business stakeholders",
+      "github_url": "https://github.com/username/ecommerce-analytics",
+      "live_demo": "https://analytics-demo.com"
+    }
+  ],
+  "career_goals": {
+    "short_term": "Lead technical architect role with AI/ML focus in a growing tech company",
+    "long_term": "Head of Engineering at an AI-first company, building and scaling technical teams",
+    "learning_focus": [
+      "Advanced AI/ML systems", 
+      "Large-scale system architecture", 
+      "Team leadership and management",
+      "Cloud infrastructure optimization"
+    ],
+    "industries_interested": [
+      "Fintech", 
+      "AI/ML", 
+      "Enterprise SaaS",
+      "EdTech"
+    ]
+  },
+  "interview_prep": {
+    "common_questions": {
+      "behavioral": [
+        "Tell me about a time you had to lead a difficult technical decision - I led our team's migration from monolith to microservices, which was controversial but resulted in 40% performance improvement",
+        "Describe a project where you had to learn a new technology quickly - Learned Kubernetes in 3 weeks to deploy our production system, successfully migrated all services with zero downtime",
+        "How do you handle conflicting priorities and tight deadlines? - I use agile prioritization, clear communication with stakeholders, and focus on MVP to deliver value incrementally"
+      ],
+      "technical": [
+        "Walk me through your approach to system design for a high-traffic application - I focus on scalability, caching strategies, database optimization, and horizontal scaling with load balancing",
+        "How would you implement a real-time notification system? - Use WebSockets or Server-Sent Events for real-time communication, Redis for pub/sub, and queue systems like RabbitMQ for reliability",
+        "Explain your experience with microservices architecture - Led migration from monolith to microservices using Docker and Kubernetes, improved deployment speed and system resilience"
+      ],
+      "situational": [
+        "A critical production bug is affecting customers. Walk me through your response process - Immediate triage, assemble response team, implement hotfix, communicate with stakeholders, conduct post-mortem to prevent recurrence",
+        "How would you approach mentoring a struggling team member? - One-on-one pairing sessions, clear goal setting, regular feedback, and creating safe environment for questions and learning",
+        "Describe how you would evaluate and implement a new technology in your team - Proof of concept, team training, gradual rollout, documentation, and measuring success metrics"
+      ],
+      "company_research": {
+        "research_areas": [
+          "Company mission and values", 
+          "Recent product launches", 
+          "Engineering culture", 
+          "Technical challenges",
+          "Growth trajectory"
+        ],
+        "preparation_questions": [
+          "What excites you about our product? - Research company products and articulate genuine interest",
+          "Why do you want to work here? - Connect company mission to personal career goals",
+          "What questions do you have for us? - Prepare thoughtful questions about team, technology, and growth"
+        ]
+      }
+    },
+    "weakness_mitigation": [
+      {
+        "weakness": "Limited experience with Kubernetes in production at scale",
+        "mitigation": "Currently completing CKA certification, have hands-on experience with Docker and successfully deployed Kubernetes clusters for current projects"
+      },
+      {
+        "weakness": "Early in management career with formal team leadership",
+        "mitigation": "Have successfully mentored 3 junior developers, led technical decisions for teams of 5-8, and completed Scrum Master certification"
+      }
+    ]
+  },
+  "professional_development": {
+    "recent_learning": [
+      "RAG systems implementation with vector databases", 
+      "Model Context Protocol (MCP) development", 
+      "Advanced AI/ML integration patterns",
+      "Kubernetes orchestration"
+    ],
+    "conferences_attended": [
+      "PyCon Australia 2024", 
+      "AWS re:Invent 2023",
+      "NDC Sydney 2024"
+    ],
+    "publications": [
+      "Blog post: Building Production RAG Systems with Upstash Vector",
+      "Technical article: Microservices Architecture Best Practices"
+    ],
+    "open_source": [
+      "Contributor to FastAPI documentation", 
+      "Maintainer of internal Python utilities library",
+      "Active on Stack Overflow with 1000+ reputation"
+    ]
+  },
+  "content_chunks": [
+    {
+      "id": "personal-summary",
+      "title": "Professional Summary",
+      "type": "profile",
+      "content": "I'm a Senior Software Engineer with 5+ years of experience building scalable applications and leading technical teams. I specialize in full-stack development, cloud architecture, and AI/ML integration. My expertise includes Python, JavaScript, AWS, Docker, Kubernetes, and modern RAG systems. I'm passionate about transforming complex business challenges into elegant technical solutions.",
+      "metadata": {
+        "category": "introduction",
+        "tags": ["summary", "overview", "profile"]
+      }
+    },
+    {
+      "id": "current-role",
+      "title": "Current Position at TechCorp",
+      "type": "experience",
+      "content": "Senior Software Engineer at TechCorp Australia (Jan 2021 - Present). Led architectural redesign that reduced page load times by 40%, improved user retention by 15%, and saved $50K annually. Built CI/CD pipeline reducing deployment time from 4 hours to 15 minutes. Manage $300K infrastructure budget and mentor 3 junior developers.",
+      "metadata": {
+        "category": "work_experience",
+        "tags": ["current", "leadership", "achievements"]
+      }
+    },
+    {
+      "id": "technical-skills",
+      "title": "Technical Expertise",
+      "type": "skills",
+      "content": "Expert in Python (5 years) with Django, FastAPI, Flask. Advanced JavaScript/TypeScript (4 years) with React, Node.js, Next.js. Experienced with PostgreSQL, MongoDB, Redis. AWS certified with 4 years experience (EC2, RDS, S3, Lambda). Proficient in Docker, Kubernetes, and CI/CD with GitHub Actions. Current focus on RAG systems and vector databases.",
+      "metadata": {
+        "category": "technical_skills",
+        "tags": ["programming", "cloud", "databases", "AI"]
+      }
+    },
+    {
+      "id": "leadership-experience",
+      "title": "Leadership and Mentoring",
+      "type": "soft_skills",
+      "content": "Led teams of 5-8 developers, mentored 3 junior developers, coordinated cross-functional teams. Certified Scrum Master with strong agile practices. Excellent at stakeholder management and technical communication. Experience managing $300K budgets and making strategic technical decisions that impact company direction.",
+      "metadata": {
+        "category": "leadership",
+        "tags": ["management", "mentoring", "communication"]
+      }
+    },
+    {
+      "id": "key-achievement-performance",
+      "title": "Performance Optimization Achievement",
+      "type": "achievement",
+      "content": "Situation: Legacy monolith causing 3-second page load times affecting user retention. Task: Lead architectural redesign. Action: Implemented microservices architecture using Docker, Kubernetes, and Redis caching. Result: Reduced load times by 40% to 1.8s, increased user retention by 15%, saved $50K annually in server costs.",
+      "metadata": {
+        "category": "achievements",
+        "tags": ["STAR", "performance", "architecture"]
+      }
+    },
+    {
+      "id": "key-achievement-cicd",
+      "title": "CI/CD Pipeline Achievement",
+      "type": "achievement",
+      "content": "Situation: Manual deployment process taking 4 hours with frequent errors. Task: Automate deployment pipeline. Action: Built CI/CD pipeline with GitHub Actions, automated testing, and deployment to AWS. Result: Reduced deployment time to 15 minutes, achieved zero-downtime deployments, 50% reduction in production bugs.",
+      "metadata": {
+        "category": "achievements",
+        "tags": ["STAR", "automation", "DevOps"]
+      }
+    },
+    {
+      "id": "salary-expectations",
+      "title": "Compensation and Location Preferences",
+      "type": "logistics",
+      "content": "Current salary: $85,000 - $95,000 AUD. Salary expectations: $95,000 - $110,000 AUD based on role complexity. Open to Melbourne CBD, Remote, or Hybrid work. 3+ years remote experience. Willing to relocate and available for interstate travel up to 25%. Australian Citizen/Permanent Resident.",
+      "metadata": {
+        "category": "logistics",
+        "tags": ["salary", "location", "remote"]
+      }
+    },
+    {
+      "id": "education-background",
+      "title": "Education and Certifications",
+      "type": "education",
+      "content": "Bachelor of Computer Science from University of Melbourne (2019) with 3.7/4.0 GPA (High Distinction). Thesis on Predictive Analytics for E-commerce Recommendations. AWS Solutions Architect Associate certified (expires 2025). Certified Scrum Master (2023). Relevant coursework in Data Structures, Algorithms, Database Systems, Machine Learning.",
+      "metadata": {
+        "category": "education",
+        "tags": ["degree", "certifications", "academic"]
+      }
+    },
+    {
+      "id": "career-goals",
+      "title": "Career Goals and Aspirations",
+      "type": "goals",
+      "content": "Short-term: Lead technical architect role with AI/ML focus. Long-term: Head of Engineering at AI-first company. Currently learning advanced AI/ML systems, large-scale architecture, and team leadership. Interested in Fintech, AI/ML, Enterprise SaaS, and EdTech industries. Passionate about building and scaling technical teams.",
+      "metadata": {
+        "category": "career_development",
+        "tags": ["goals", "aspirations", "growth"]
+      }
+    },
+    {
+      "id": "ai-ml-experience",
+      "title": "AI and Machine Learning Experience",
+      "type": "skills",
+      "content": "Built RAG systems using Upstash Vector database and Groq API. Experience with LLM integration, OpenAI API, and vector embeddings. Created AI-Powered Digital Twin Workshop Platform helping 100+ professionals. Strong understanding of semantic search, retrieval-augmented generation, and Model Context Protocol (MCP) development.",
+      "metadata": {
+        "category": "AI_ML",
+        "tags": ["RAG", "AI", "vector_databases", "LLM"]
+      }
+    },
+    {
+      "id": "project-mobile-app",
+      "title": "Mobile App Development Project",
+      "type": "project",
+      "content": "Situation: Client needed mobile app with tight 3-month deadline. Task: Develop cross-platform mobile application. Action: Built React Native app with backend API integration and real-time notifications. Result: Delivered 2 weeks early, app achieved 4.7-star rating with 10K+ downloads in first month.",
+      "metadata": {
+        "category": "projects",
+        "tags": ["STAR", "mobile", "React_Native"]
+      }
+    },
+    {
+      "id": "problem-solving-approach",
+      "title": "Problem-Solving and Technical Decision Making",
+      "type": "soft_skills",
+      "content": "Approach complex problems systematically: analyze requirements, research solutions, create proof of concept, collaborate with team, implement incrementally, and measure success. Strong at balancing technical debt with feature delivery. Make data-driven decisions and document architectural choices for team alignment.",
+      "metadata": {
+        "category": "problem_solving",
+        "tags": ["approach", "methodology", "decision_making"]
+      }
+    }
+  ]
+}
