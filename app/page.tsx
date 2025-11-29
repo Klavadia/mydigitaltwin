@@ -10,6 +10,8 @@ export default function Home() {
   const [loadStatus, setLoadStatus] = useState('')
   const [vectorInfo, setVectorInfo] = useState<any>(null)
   const [activeSection, setActiveSection] = useState('home')
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [chatHistory, setChatHistory] = useState<Array<{question: string, response: string}>>([])
   const [isSetupOpen, setIsSetupOpen] = useState(false)
 
   const handleQuery = async (e: React.FormEvent) => {
@@ -17,13 +19,17 @@ export default function Home() {
     if (!question.trim()) return
 
     setLoading(true)
-    setResponse('')
+    const currentQuestion = question
+    setQuestion('')
 
     try {
-      const result = await digitalTwinQuery(question)
+      const result = await digitalTwinQuery(currentQuestion)
       setResponse(result.response)
+      setChatHistory(prev => [...prev, { question: currentQuestion, response: result.response }])
     } catch (error) {
-      setResponse(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`)
+      const errorMsg = `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      setResponse(errorMsg)
+      setChatHistory(prev => [...prev, { question: currentQuestion, response: errorMsg }])
     } finally {
       setLoading(false)
     }
@@ -58,7 +64,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'chat', 'setup']
+      const sections = ['home', 'about', 'setup']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -87,7 +93,7 @@ export default function Home() {
               Digital Twin
             </h1>
             <div className="flex gap-8">
-              {['home', 'about', 'chat', 'setup'].map((section) => (
+              {['home', 'about', 'setup'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -123,7 +129,7 @@ export default function Home() {
           </p>
           <div className="flex gap-4 justify-center">
             <button
-              onClick={() => scrollToSection('chat')}
+              onClick={() => setIsChatOpen(true)}
               className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all"
             >
               Start Chatting
@@ -178,70 +184,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Chat Section */}
-      <section id="chat" className="min-h-screen flex items-center justify-center px-6 py-20">
-        <div className="max-w-4xl mx-auto w-full">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Chat with Digital Twin
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
-              Ask me anything about experience, skills, projects, and career goals
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 mb-8">
-            <form onSubmit={handleQuery} className="space-y-6">
-              <div>
-                <input
-                  type="text"
-                  value={question}
-                  onChange={(e) => setQuestion(e.target.value)}
-                  placeholder="Ask about experience, skills, projects, salary expectations..."
-                  className="w-full p-4 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-900 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 outline-none transition-all text-lg"
-                  disabled={loading}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={loading || !question.trim()}
-                className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-xl hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-              >
-                {loading ? '🤔 Thinking...' : '💬 Ask Question'}
-              </button>
-            </form>
-
-            {response && (
-              <div className="mt-8 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-indigo-950 rounded-xl border-2 border-blue-200 dark:border-blue-900">
-                <h3 className="font-semibold text-lg mb-3 text-blue-900 dark:text-blue-300">Response:</h3>
-                <p className="whitespace-pre-wrap text-gray-800 dark:text-gray-200 leading-relaxed">{response}</p>
-              </div>
-            )}
-          </div>
-
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 p-8 rounded-2xl border border-purple-200 dark:border-purple-900">
-            <h3 className="font-bold text-lg mb-4 text-purple-900 dark:text-purple-300">💡 Sample Questions</h3>
-            <div className="grid md:grid-cols-2 gap-3">
-              {[
-                'Tell me about your work experience',
-                'What are your technical skills?',
-                'Describe your key achievements',
-                'What are your salary expectations?',
-                'Tell me about your career goals',
-                'What projects have you worked on?'
-              ].map((q, i) => (
-                <button
-                  key={i}
-                  onClick={() => setQuestion(q)}
-                  className="text-left p-3 bg-white dark:bg-gray-800 rounded-lg hover:shadow-md hover:scale-[1.02] transition-all text-sm text-gray-700 dark:text-gray-300 border border-purple-100 dark:border-purple-900"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Chat Section - REMOVED, replaced with floating widget */}
 
       {/* Setup Section */}
       <section id="setup" className="min-h-screen flex items-center justify-center px-6 py-20">
@@ -311,6 +254,120 @@ export default function Home() {
           </p>
         </div>
       </footer>
+
+      {/* Floating Chat Widget */}
+      {!isChatOpen && (
+        <button
+          onClick={() => setIsChatOpen(true)}
+          className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all flex items-center gap-2 group"
+        >
+          <span className="text-2xl">💬</span>
+          <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap font-semibold">
+            chat with my digital twin
+          </span>
+        </button>
+      )}
+
+      {/* Chat Modal */}
+      {isChatOpen && (
+        <div className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col border border-gray-200 dark:border-gray-800">
+          {/* Chat Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-t-2xl flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-xl">
+                🤖
+              </div>
+              <div>
+                <h3 className="font-bold">Digital Twin</h3>
+                <p className="text-xs text-blue-100">AI Interview Assistant</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsChatOpen(false)}
+              className="hover:bg-white/20 rounded-full p-2 transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Chat Messages */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {chatHistory.length === 0 ? (
+              <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
+                <div className="text-4xl mb-4">👋</div>
+                <p className="mb-4">Hi! I'm your Digital Twin.</p>
+                <p className="text-sm mb-6">Ask me about experience, skills, or projects!</p>
+                <div className="space-y-2">
+                  {[
+                    'Tell me about your experience',
+                    'What are your skills?',
+                    'What are your career goals?'
+                  ].map((q, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setQuestion(q)}
+                      className="block w-full text-left p-3 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              chatHistory.map((chat, idx) => (
+                <div key={idx} className="space-y-2">
+                  {/* User Question */}
+                  <div className="flex justify-end">
+                    <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl rounded-tr-sm px-4 py-2 max-w-[80%]">
+                      <p className="text-sm">{chat.question}</p>
+                    </div>
+                  </div>
+                  {/* AI Response */}
+                  <div className="flex justify-start">
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl rounded-tl-sm px-4 py-2 max-w-[80%]">
+                      <p className="text-sm whitespace-pre-wrap">{chat.response}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+            {loading && (
+              <div className="flex justify-start">
+                <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl rounded-tl-sm px-4 py-3">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Chat Input */}
+          <div className="p-4 border-t border-gray-200 dark:border-gray-800">
+            <form onSubmit={handleQuery} className="flex gap-2">
+              <input
+                type="text"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder="Ask me anything..."
+                className="flex-1 p-3 border border-gray-300 dark:border-gray-700 rounded-full bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                disabled={loading}
+              />
+              <button
+                type="submit"
+                disabled={loading || !question.trim()}
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3 rounded-full hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
