@@ -1,177 +1,155 @@
 {
   "personal": {
-    "name": "Your Full Name",
-    "title": "Senior Software Engineer",
-    "location": "Melbourne, Australia",
-    "summary": "Passionate software engineer with 5+ years building scalable applications and leading technical teams to deliver high-impact solutions.",
-    "elevator_pitch": "I transform complex business challenges into elegant technical solutions, specializing in full-stack development with a focus on performance optimization and team leadership.",
+    "name": "Karl Francis L. Lavadia",
+    "title": "BS Information Technology Student",
+    "location": "Cagayan Valley, Philippines",
+    "summary": "Passionate IT student specializing in full-stack web development with experience in building modern web applications using Laravel, Filament, and JavaScript frameworks.",
+    "elevator_pitch": "I'm a driven IT student focused on creating practical solutions through web development, with hands-on experience in building real-world applications for student organizations and academic projects.",
     "contact": {
-      "email": "your.email@example.com",
-      "linkedin": "https://linkedin.com/in/yourprofile",
-      "github": "https://github.com/yourusername",
-      "portfolio": "https://yourportfolio.com"
+      "email": "zkaelnich@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/karl-lavadia-9a6212385/",
+      "github": "https://github.com/Klavadia",
+      "portfolio": "https://mydigitaltwin-olive.vercel.app/"
     }
   },
   "salary_location": {
-    "current_salary": "$85,000 - $95,000 AUD",
-    "salary_expectations": "$95,000 - $110,000 AUD based on role complexity",
-    "location_preferences": ["Melbourne CBD", "Remote", "Hybrid"],
+    "current_salary": "Student - No current salary",
+    "salary_expectations": "Entry-level position or internship opportunities",
+    "location_preferences": ["Cagayan Valley", "Remote", "Hybrid"],
     "relocation_willing": true,
-    "remote_experience": "3+ years remote collaboration experience",
-    "travel_availability": "Available for interstate travel up to 25%",
-    "work_authorization": "Australian Citizen / Permanent Resident"
+    "remote_experience": "Experience with remote learning and online collaboration",
+    "travel_availability": "Available for travel as needed",
+    "work_authorization": "Filipino Citizen"
   },
   "experience": [
     {
-      "company": "TechCorp Australia",
-      "title": "Senior Software Engineer",
-      "duration": "Jan 2021 - Present (3.5 years)",
-      "company_context": "200+ employee fintech startup, Series B funding",
-      "team_structure": "Engineering team of 25, direct reports: 3 junior developers",
+      "company": "St. Paul University Philippines - Student Council",
+      "title": "Project Developer",
+      "duration": "Academic Project",
+      "company_context": "Student organization project for St. Paul University Philippines",
+      "team_structure": "Student development project",
       "achievements_star": [
         {
-          "situation": "Legacy monolith causing 3-second page load times affecting user retention",
-          "task": "Lead architectural redesign to improve performance",
-          "action": "Implemented microservices architecture using Docker, Kubernetes, and Redis caching",
-          "result": "Reduced load times by 40% to 1.8s, increased user retention by 15%, saved $50K annually in server costs"
+          "situation": "Student council needed a digital system to track member activities and performance",
+          "task": "Develop a comprehensive e-portfolio and ranking system",
+          "action": "Built web application using Laravel 12 and Filament v4, implemented MySQL database for tracking activities, achievements, and rankings",
+          "result": "Created functional system that streamlines student council performance evaluation and recognition"
         },
         {
-          "situation": "Manual deployment process taking 4 hours with frequent errors",
-          "task": "Automate deployment pipeline for faster releases",
-          "action": "Built CI/CD pipeline with GitHub Actions, automated testing, and deployment to AWS",
-          "result": "Reduced deployment time to 15 minutes, zero-downtime deployments, 50% reduction in production bugs"
+          "situation": "Needed to create a professional online presence with AI capabilities",
+          "task": "Build personal portfolio website with modern technologies",
+          "action": "Developed Next.js application with RAG system integration using Upstash Vector and Groq API",
+          "result": "Successfully deployed AI-powered portfolio showcasing projects and technical skills"
         }
       ],
-      "technical_skills_used": ["Python", "AWS (EC2, RDS, S3)", "Docker", "Kubernetes", "PostgreSQL", "Redis"],
-      "leadership_examples": ["Mentored 3 junior developers", "Led code review processes", "Coordinated with product and design teams"],
-      "budget_managed": "$300K annual infrastructure budget",
-      "team_size_managed": 5
-    },
-    {
-      "company": "Digital Solutions Ltd",
-      "title": "Software Engineer",
-      "duration": "Mar 2019 - Dec 2020 (1.75 years)",
-      "company_context": "Mid-size consultancy, 50 employees",
-      "team_structure": "Development team of 8",
-      "achievements_star": [
-        {
-          "situation": "Client needed mobile app with tight 3-month deadline",
-          "task": "Develop cross-platform mobile application",
-          "action": "Built React Native app with backend API integration, implemented real-time notifications",
-          "result": "Delivered 2 weeks early, app achieved 4.7-star rating with 10K+ downloads in first month"
-        }
-      ],
-      "technical_skills_used": ["React Native", "Node.js", "MongoDB", "Firebase"],
-      "leadership_examples": ["Trained 2 team members on React Native best practices"],
+      "technical_skills_used": ["PHP", "Laravel 12", "Filament v4", "MySQL", "HTML", "CSS", "JavaScript", "Next.js", "TypeScript"],
+      "leadership_examples": ["Self-directed learning", "Project planning and execution", "Problem-solving in development"],
       "budget_managed": "N/A",
-      "team_size_managed": 2
+      "team_size_managed": 0
     }
   ],
   "skills": {
     "technical": {
       "programming_languages": [
-        {"language": "Python", "years": 5, "proficiency": "Expert", "frameworks": ["Django", "FastAPI", "Flask"]},
-        {"language": "JavaScript", "years": 4, "proficiency": "Advanced", "frameworks": ["React", "Node.js", "TypeScript", "Next.js"]},
-        {"language": "SQL", "years": 5, "proficiency": "Advanced", "frameworks": ["PostgreSQL", "MySQL"]}
+        {"language": "PHP", "years": 2, "proficiency": "Intermediate", "frameworks": ["Laravel 12", "Filament v4"]},
+        {"language": "JavaScript", "years": 2, "proficiency": "Intermediate", "frameworks": ["Next.js", "React"]},
+        {"language": "Python", "years": 1, "proficiency": "Beginner", "frameworks": []},
+        {"language": "SQL", "years": 2, "proficiency": "Intermediate", "frameworks": ["MySQL"]}
       ],
       "databases": [
-        "PostgreSQL (5 years)", 
-        "MongoDB (3 years)", 
-        "Redis (2 years)",
-        "MySQL (4 years)"
+        "MySQL", 
+        "Vector databases (Upstash)"
       ],
       "cloud_platforms": [
-        "AWS (4 years) - EC2, RDS, S3, Lambda, CloudWatch", 
-        "Docker (3 years)", 
-        "Kubernetes (2 years)",
-        "GitHub Actions (2 years)"
+        "Vercel", 
+        "GitHub",
+        "Upstash"
       ],
       "ai_ml": [
         "RAG systems", 
         "Vector databases", 
-        "LLM integration", 
-        "OpenAI API",
+        "Groq API",
         "Upstash Vector"
       ]
     },
     "soft_skills": [
-      "Technical Leadership", 
-      "Cross-functional Collaboration", 
-      "Mentoring", 
       "Problem-solving", 
-      "Agile/Scrum",
+      "Team Collaboration", 
+      "Time Management", 
+      "Adaptability",
       "Clear Communication",
-      "Stakeholder Management"
+      "Self-Learning"
     ],
     "certifications": [
-      "AWS Solutions Architect Associate (expires 2025)", 
-      "Certified Scrum Master (2023)"
+      "Currently pursuing certifications in web development"
     ]
   },
   "education": {
-    "university": "University of Melbourne",
-    "degree": "Bachelor of Computer Science",
-    "graduation_year": 2019,
-    "gpa": "3.7/4.0 (High Distinction)",
+    "university": "St. Paul University Philippines",
+    "degree": "Bachelor of Science in Information Technology",
+    "graduation_year": "Expected",
+    "gpa": "N/A",
     "relevant_coursework": [
-      "Data Structures", 
-      "Algorithms", 
-      "Database Systems", 
-      "Machine Learning",
-      "Software Engineering"
+      "Web Development", 
+      "Database Management", 
+      "Programming Fundamentals", 
+      "Data Structures and Algorithms",
+      "Machine Learning Basics",
+      "Cloud Computing",
+      "Python Programming"
     ],
-    "thesis_project": "Predictive Analytics for E-commerce Recommendations using Machine Learning"
+    "thesis_project": "Paulinian Student Council E-Portfolio and Ranking System"
   },
   "projects_portfolio": [
     {
-      "name": "AI-Powered Digital Twin Workshop Platform",
-      "description": "End-to-end RAG system for interview preparation with MCP server integration",
-      "technologies": ["Python", "Upstash Vector", "Groq API", "Next.js", "TypeScript"],
-      "impact": "Helped 100+ professionals improve interview performance",
-      "github_url": "https://github.com/username/digital-twin",
-      "live_demo": "https://mydigitaltwin.vercel.app"
+      "name": "Paulinian Student Council E-Portfolio and Ranking System",
+      "description": "A digital portfolio and performance evaluation platform for student council members. Tracks activities, achievements, and contributions with an intelligent ranking system to recognize outstanding performance and leadership.",
+      "technologies": ["Laravel 12", "Filament v4", "HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+      "impact": "Streamlines student council performance tracking and recognition",
+      "github_url": "https://github.com/Klavadia",
+      "live_demo": "N/A"
     },
     {
-      "name": "E-commerce Analytics Dashboard",
-      "description": "Real-time analytics platform for tracking sales and customer behavior",
-      "technologies": ["React", "Node.js", "PostgreSQL", "Redis", "Chart.js"],
-      "impact": "Reduced decision-making time by 60% for business stakeholders",
-      "github_url": "https://github.com/username/ecommerce-analytics",
-      "live_demo": "https://analytics-demo.com"
+      "name": "Digital Twin Portfolio Website",
+      "description": "Personal portfolio website with AI-powered chat integration using RAG systems",
+      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Upstash Vector", "Groq API"],
+      "impact": "Professional online presence showcasing projects and skills",
+      "github_url": "https://github.com/Klavadia/mydigitaltwin",
+      "live_demo": "https://mydigitaltwin.vercel.app"
     }
   ],
   "career_goals": {
-    "short_term": "Lead technical architect role with AI/ML focus in a growing tech company",
-    "long_term": "Head of Engineering at an AI-first company, building and scaling technical teams",
+    "short_term": "Secure internship or entry-level position as a web developer",
+    "long_term": "Become a full-stack developer specializing in modern web technologies and AI integration",
     "learning_focus": [
-      "Advanced AI/ML systems", 
-      "Large-scale system architecture", 
-      "Team leadership and management",
-      "Cloud infrastructure optimization"
+      "Advanced Laravel and PHP development", 
+      "Modern JavaScript frameworks", 
+      "AI/ML integration in web applications",
+      "Cloud deployment and DevOps"
     ],
     "industries_interested": [
-      "Fintech", 
+      "Web Development", 
       "AI/ML", 
-      "Enterprise SaaS",
-      "EdTech"
+      "EdTech",
+      "Startups"
     ]
   },
   "interview_prep": {
     "common_questions": {
       "behavioral": [
-        "Tell me about a time you had to lead a difficult technical decision - I led our team's migration from monolith to microservices, which was controversial but resulted in 40% performance improvement",
-        "Describe a project where you had to learn a new technology quickly - Learned Kubernetes in 3 weeks to deploy our production system, successfully migrated all services with zero downtime",
-        "How do you handle conflicting priorities and tight deadlines? - I use agile prioritization, clear communication with stakeholders, and focus on MVP to deliver value incrementally"
+        "Tell me about a challenging project you worked on - I developed the Paulinian Student Council E-Portfolio system using Laravel and Filament, which required learning new frameworks and implementing complex database relationships for tracking member performance",
+        "Describe a time you had to learn a new technology quickly - When building my digital twin portfolio, I learned RAG systems, vector databases, and Groq API integration in a short time to create an AI-powered chat feature",
+        "How do you handle conflicting priorities and tight deadlines? - As a student balancing academics and projects, I prioritize tasks based on urgency and impact, break large tasks into smaller manageable pieces, and maintain clear communication about progress"
       ],
       "technical": [
-        "Walk me through your approach to system design for a high-traffic application - I focus on scalability, caching strategies, database optimization, and horizontal scaling with load balancing",
-        "How would you implement a real-time notification system? - Use WebSockets or Server-Sent Events for real-time communication, Redis for pub/sub, and queue systems like RabbitMQ for reliability",
-        "Explain your experience with microservices architecture - Led migration from monolith to microservices using Docker and Kubernetes, improved deployment speed and system resilience"
+        "Explain your experience with Laravel and PHP - I've built a full e-portfolio system using Laravel 12 and Filament v4, implementing CRUD operations, authentication, database relationships, and admin panels for managing student council data",
+        "What JavaScript frameworks have you worked with? - I'm proficient in Next.js and React, which I used to build my portfolio website with server-side rendering, TypeScript for type safety, and Tailwind CSS for styling",
+        "Tell me about working with databases - I've designed and implemented MySQL databases for the student council system, creating normalized table structures, relationships, and queries for tracking activities and rankings"
       ],
       "situational": [
-        "A critical production bug is affecting customers. Walk me through your response process - Immediate triage, assemble response team, implement hotfix, communicate with stakeholders, conduct post-mortem to prevent recurrence",
-        "How would you approach mentoring a struggling team member? - One-on-one pairing sessions, clear goal setting, regular feedback, and creating safe environment for questions and learning",
-        "Describe how you would evaluate and implement a new technology in your team - Proof of concept, team training, gradual rollout, documentation, and measuring success metrics"
+        "How do you debug issues in your code? - I use systematic debugging by checking error logs, using browser dev tools, adding console logs strategically, and researching error messages. I also review my code logic step-by-step to identify the source",
+        "How do you stay updated with new technologies? - I follow web development blogs, watch tutorial videos, participate in online coding communities, work on personal projects, and experiment with new frameworks in my learning projects",
+        "What would you do if you encountered a problem you couldn't solve? - I'd first research documentation and online resources, break down the problem into smaller parts, seek help from online communities or forums, and learn from the solution to avoid similar issues"
       ],
       "company_research": {
         "research_areas": [
@@ -190,156 +168,154 @@
     },
     "weakness_mitigation": [
       {
-        "weakness": "Limited experience with Kubernetes in production at scale",
-        "mitigation": "Currently completing CKA certification, have hands-on experience with Docker and successfully deployed Kubernetes clusters for current projects"
+        "weakness": "Limited professional work experience",
+        "mitigation": "I compensate through hands-on academic projects like the Student Council E-Portfolio system and personal projects like my AI-powered portfolio. I'm actively seeking internship opportunities to gain real-world experience"
       },
       {
-        "weakness": "Early in management career with formal team leadership",
-        "mitigation": "Have successfully mentored 3 junior developers, led technical decisions for teams of 5-8, and completed Scrum Master certification"
+        "weakness": "Still building expertise in advanced concepts",
+        "mitigation": "I'm a fast learner committed to continuous improvement. I regularly work on new projects to expand my skills, recently learning RAG systems and vector databases while building my digital twin portfolio"
       }
     ]
   },
   "professional_development": {
     "recent_learning": [
-      "RAG systems implementation with vector databases", 
-      "Model Context Protocol (MCP) development", 
-      "Advanced AI/ML integration patterns",
-      "Kubernetes orchestration"
+      "Laravel 12 and Filament v4 framework", 
+      "RAG systems with Upstash Vector and Groq API", 
+      "Next.js and TypeScript development",
+      "AI integration in web applications",
+      "Modern web development practices"
     ],
     "conferences_attended": [
-      "PyCon Australia 2024", 
-      "AWS re:Invent 2023",
-      "NDC Sydney 2024"
+      "Student tech workshops and seminars at St. Paul University Philippines"
     ],
     "publications": [
-      "Blog post: Building Production RAG Systems with Upstash Vector",
-      "Technical article: Microservices Architecture Best Practices"
+      "GitHub portfolio showcasing academic and personal projects"
     ],
     "open_source": [
-      "Contributor to FastAPI documentation", 
-      "Maintainer of internal Python utilities library",
-      "Active on Stack Overflow with 1000+ reputation"
+      "Active learner exploring open-source projects",
+      "Sharing code and projects on GitHub",
+      "Participating in coding communities"
     ]
   },
   "content_chunks": [
     {
       "id": "personal-summary",
-      "title": "Professional Summary",
+      "title": "Student Profile",
       "type": "profile",
-      "content": "I'm a Senior Software Engineer with 5+ years of experience building scalable applications and leading technical teams. I specialize in full-stack development, cloud architecture, and AI/ML integration. My expertise includes Python, JavaScript, AWS, Docker, Kubernetes, and modern RAG systems. I'm passionate about transforming complex business challenges into elegant technical solutions.",
+      "content": "I'm Karl Francis L. Lavadia, a BS Information Technology student at St. Paul University Philippines in Cagayan Valley. I specialize in full-stack development with hands-on experience in Laravel, Filament, PHP, JavaScript, and modern frameworks like Next.js. I'm passionate about building practical solutions and recently explored AI integration by creating an AI-powered portfolio with RAG systems using Upstash Vector and Groq API.",
       "metadata": {
         "category": "introduction",
-        "tags": ["summary", "overview", "profile"]
+        "tags": ["summary", "overview", "profile", "student"]
       }
     },
     {
-      "id": "current-role",
-      "title": "Current Position at TechCorp",
-      "type": "experience",
-      "content": "Senior Software Engineer at TechCorp Australia (Jan 2021 - Present). Led architectural redesign that reduced page load times by 40%, improved user retention by 15%, and saved $50K annually. Built CI/CD pipeline reducing deployment time from 4 hours to 15 minutes. Manage $300K infrastructure budget and mentor 3 junior developers.",
+      "id": "current-status",
+      "title": "Current Student Status",
+      "type": "education",
+      "content": "Currently pursuing Bachelor of Science in Information Technology at St. Paul University Philippines. Actively working on academic projects including the Paulinian Student Council E-Portfolio and Ranking System using Laravel 12 and Filament v4. Building practical web development skills through hands-on projects and exploring modern technologies like AI integration and RAG systems.",
       "metadata": {
-        "category": "work_experience",
-        "tags": ["current", "leadership", "achievements"]
+        "category": "education_status",
+        "tags": ["current", "student", "learning"]
       }
     },
     {
       "id": "technical-skills",
-      "title": "Technical Expertise",
+      "title": "Technical Skills",
       "type": "skills",
-      "content": "Expert in Python (5 years) with Django, FastAPI, Flask. Advanced JavaScript/TypeScript (4 years) with React, Node.js, Next.js. Experienced with PostgreSQL, MongoDB, Redis. AWS certified with 4 years experience (EC2, RDS, S3, Lambda). Proficient in Docker, Kubernetes, and CI/CD with GitHub Actions. Current focus on RAG systems and vector databases.",
+      "content": "Intermediate proficiency in PHP with Laravel 12 and Filament v4 frameworks. Experience with JavaScript, Next.js, React, TypeScript, and Tailwind CSS. Comfortable with HTML, CSS, and front-end development. Working knowledge of SQL and MySQL databases. Beginner in Python. Currently exploring AI/ML technologies including RAG systems, Upstash Vector database, and Groq API for building intelligent web applications.",
       "metadata": {
         "category": "technical_skills",
-        "tags": ["programming", "cloud", "databases", "AI"]
+        "tags": ["programming", "web_development", "databases", "AI"]
       }
     },
     {
-      "id": "leadership-experience",
-      "title": "Leadership and Mentoring",
+      "id": "collaboration-skills",
+      "title": "Collaboration and Soft Skills",
       "type": "soft_skills",
-      "content": "Led teams of 5-8 developers, mentored 3 junior developers, coordinated cross-functional teams. Certified Scrum Master with strong agile practices. Excellent at stakeholder management and technical communication. Experience managing $300K budgets and making strategic technical decisions that impact company direction.",
+      "content": "Strong problem-solving abilities demonstrated through academic projects. Effective team collaboration skills developed through group projects and coursework. Good time management balancing academic responsibilities with personal learning projects. Self-motivated learner who adapts quickly to new technologies. Clear communication skills for explaining technical concepts and project requirements.",
       "metadata": {
-        "category": "leadership",
-        "tags": ["management", "mentoring", "communication"]
+        "category": "soft_skills",
+        "tags": ["collaboration", "problem-solving", "communication"]
       }
     },
     {
-      "id": "key-achievement-performance",
-      "title": "Performance Optimization Achievement",
+      "id": "key-achievement-portfolio-system",
+      "title": "Student Council E-Portfolio Achievement",
       "type": "achievement",
-      "content": "Situation: Legacy monolith causing 3-second page load times affecting user retention. Task: Lead architectural redesign. Action: Implemented microservices architecture using Docker, Kubernetes, and Redis caching. Result: Reduced load times by 40% to 1.8s, increased user retention by 15%, saved $50K annually in server costs.",
+      "content": "Situation: Student council needed a digital system to track member activities and performance. Task: Develop comprehensive e-portfolio and ranking system. Action: Built web application using Laravel 12 and Filament v4 with MySQL database, implementing user authentication, activity tracking, and intelligent ranking algorithms. Result: Created functional system that streamlines student council performance evaluation and member recognition.",
       "metadata": {
         "category": "achievements",
-        "tags": ["STAR", "performance", "architecture"]
+        "tags": ["STAR", "project", "laravel", "web_development"]
       }
     },
     {
-      "id": "key-achievement-cicd",
-      "title": "CI/CD Pipeline Achievement",
+      "id": "key-achievement-ai-portfolio",
+      "title": "AI-Powered Portfolio Achievement",
       "type": "achievement",
-      "content": "Situation: Manual deployment process taking 4 hours with frequent errors. Task: Automate deployment pipeline. Action: Built CI/CD pipeline with GitHub Actions, automated testing, and deployment to AWS. Result: Reduced deployment time to 15 minutes, achieved zero-downtime deployments, 50% reduction in production bugs.",
+      "content": "Situation: Needed professional online presence with modern AI capabilities. Task: Build portfolio website with AI chat integration. Action: Developed Next.js application with TypeScript and Tailwind CSS, integrated RAG system using Upstash Vector database and Groq API for intelligent chat responses. Result: Successfully deployed AI-powered portfolio showcasing technical projects and skills, demonstrating ability to learn and implement cutting-edge technologies.",
       "metadata": {
         "category": "achievements",
-        "tags": ["STAR", "automation", "DevOps"]
+        "tags": ["STAR", "AI", "RAG", "Next.js"]
       }
     },
     {
-      "id": "salary-expectations",
-      "title": "Compensation and Location Preferences",
+      "id": "job-preferences",
+      "title": "Job Search Preferences",
       "type": "logistics",
-      "content": "Current salary: $85,000 - $95,000 AUD. Salary expectations: $95,000 - $110,000 AUD based on role complexity. Open to Melbourne CBD, Remote, or Hybrid work. 3+ years remote experience. Willing to relocate and available for interstate travel up to 25%. Australian Citizen/Permanent Resident.",
+      "content": "Currently seeking internship or entry-level web developer positions. Open to opportunities in Cagayan Valley, remote work, or hybrid arrangements. Willing to relocate for the right opportunity. Filipino citizen available to travel as needed. Interested in roles involving PHP/Laravel development, JavaScript frameworks, or AI/ML integration projects.",
       "metadata": {
         "category": "logistics",
-        "tags": ["salary", "location", "remote"]
+        "tags": ["internship", "entry-level", "location", "remote"]
       }
     },
     {
       "id": "education-background",
-      "title": "Education and Certifications",
+      "title": "Education Background",
       "type": "education",
-      "content": "Bachelor of Computer Science from University of Melbourne (2019) with 3.7/4.0 GPA (High Distinction). Thesis on Predictive Analytics for E-commerce Recommendations. AWS Solutions Architect Associate certified (expires 2025). Certified Scrum Master (2023). Relevant coursework in Data Structures, Algorithms, Database Systems, Machine Learning.",
+      "content": "Currently pursuing Bachelor of Science in Information Technology at St. Paul University Philippines in Cagayan Valley. Thesis project: Paulinian Student Council E-Portfolio and Ranking System. Relevant coursework includes Web Development, Database Management, Programming Fundamentals, Data Structures and Algorithms, Machine Learning Basics, Cloud Computing, and Python Programming. Actively pursuing web development certifications.",
       "metadata": {
         "category": "education",
-        "tags": ["degree", "certifications", "academic"]
+        "tags": ["degree", "BSIT", "academic", "student"]
       }
     },
     {
       "id": "career-goals",
       "title": "Career Goals and Aspirations",
       "type": "goals",
-      "content": "Short-term: Lead technical architect role with AI/ML focus. Long-term: Head of Engineering at AI-first company. Currently learning advanced AI/ML systems, large-scale architecture, and team leadership. Interested in Fintech, AI/ML, Enterprise SaaS, and EdTech industries. Passionate about building and scaling technical teams.",
+      "content": "Short-term: Secure internship or entry-level web developer position to gain real-world experience. Long-term: Become a skilled full-stack developer specializing in modern web technologies with AI integration capabilities. Currently focused on mastering Laravel/PHP development, modern JavaScript frameworks, and exploring AI/ML integration in web applications. Interested in Web Development, AI/ML, EdTech, and Startup industries. Excited about cloud deployment and DevOps practices.",
       "metadata": {
         "category": "career_development",
-        "tags": ["goals", "aspirations", "growth"]
+        "tags": ["goals", "aspirations", "student", "entry-level"]
       }
     },
     {
       "id": "ai-ml-experience",
-      "title": "AI and Machine Learning Experience",
+      "title": "AI and Machine Learning Learning",
       "type": "skills",
-      "content": "Built RAG systems using Upstash Vector database and Groq API. Experience with LLM integration, OpenAI API, and vector embeddings. Created AI-Powered Digital Twin Workshop Platform helping 100+ professionals. Strong understanding of semantic search, retrieval-augmented generation, and Model Context Protocol (MCP) development.",
+      "content": "Actively learning AI/ML technologies through hands-on projects. Built personal portfolio with RAG (Retrieval-Augmented Generation) system using Upstash Vector database and Groq API for intelligent chat functionality. Gaining understanding of vector embeddings, semantic search, and how to integrate AI capabilities into web applications. Completed Machine Learning Basics coursework and exploring practical AI applications in web development.",
       "metadata": {
         "category": "AI_ML",
-        "tags": ["RAG", "AI", "vector_databases", "LLM"]
+        "tags": ["RAG", "AI", "vector_databases", "learning"]
       }
     },
     {
-      "id": "project-mobile-app",
-      "title": "Mobile App Development Project",
+      "id": "project-student-council",
+      "title": "Student Council E-Portfolio Project",
       "type": "project",
-      "content": "Situation: Client needed mobile app with tight 3-month deadline. Task: Develop cross-platform mobile application. Action: Built React Native app with backend API integration and real-time notifications. Result: Delivered 2 weeks early, app achieved 4.7-star rating with 10K+ downloads in first month.",
+      "content": "Paulinian Student Council E-Portfolio and Ranking System - A comprehensive web application for tracking student council member activities, achievements, and performance. Built with Laravel 12, Filament v4, PHP, MySQL, HTML, CSS, and JavaScript. Features include user authentication, activity tracking, achievement logging, and intelligent ranking system to recognize outstanding performance and leadership among council members.",
       "metadata": {
         "category": "projects",
-        "tags": ["STAR", "mobile", "React_Native"]
+        "tags": ["laravel", "php", "web_development", "academic"]
       }
     },
     {
       "id": "problem-solving-approach",
-      "title": "Problem-Solving and Technical Decision Making",
+      "title": "Problem-Solving Approach",
       "type": "soft_skills",
-      "content": "Approach complex problems systematically: analyze requirements, research solutions, create proof of concept, collaborate with team, implement incrementally, and measure success. Strong at balancing technical debt with feature delivery. Make data-driven decisions and document architectural choices for team alignment.",
+      "content": "Approach coding challenges systematically by breaking down problems into smaller parts, researching documentation and online resources, experimenting with different solutions, and learning from errors. Use debugging tools effectively including browser dev tools, error logs, and code review. Stay persistent when facing difficulties and continuously seek to understand underlying concepts rather than just implementing surface solutions. Document learning and solutions for future reference.",
       "metadata": {
         "category": "problem_solving",
-        "tags": ["approach", "methodology", "decision_making"]
+        "tags": ["approach", "debugging", "learning"]
       }
     }
   ]
