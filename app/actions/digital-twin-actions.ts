@@ -96,7 +96,14 @@ export async function loadDigitalTwinData(profileData: any) {
       }
     }
 
-    // Prepare vectors for upload
+    // Step 1: Delete ALL existing vectors to ensure clean slate
+    try {
+      await index.reset()
+    } catch (resetError) {
+      console.warn('Reset failed, continuing with upsert:', resetError)
+    }
+
+    // Step 2: Prepare vectors for upload
     const vectors = contentChunks.map((chunk: any) => ({
       id: chunk.id,
       data: `${chunk.title}: ${chunk.content}`,
@@ -109,12 +116,12 @@ export async function loadDigitalTwinData(profileData: any) {
       },
     }))
 
-    // Upload to Upstash Vector
+    // Step 3: Upload to Upstash Vector
     await index.upsert(vectors)
 
     return {
       success: true,
-      message: `Successfully loaded ${vectors.length} content chunks`,
+      message: `Successfully loaded ${vectors.length} content chunks (database cleared first)`,
       count: vectors.length,
     }
   } catch (error) {

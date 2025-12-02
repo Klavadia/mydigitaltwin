@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { digitalTwinQuery, loadDigitalTwinData, getVectorInfo } from './actions/digital-twin-actions'
 
 export default function Home() {
@@ -13,6 +13,7 @@ export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [chatHistory, setChatHistory] = useState<Array<{question: string, response: string}>>([])
   const [isSetupOpen, setIsSetupOpen] = useState(false)
+  const chatMessagesRef = useRef<HTMLDivElement>(null)
 
   const handleQuery = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,10 +27,30 @@ export default function Home() {
       const result = await digitalTwinQuery(currentQuestion)
       setResponse(result.response)
       setChatHistory(prev => [...prev, { question: currentQuestion, response: result.response }])
+      
+      // Auto-scroll to bottom with smooth animation
+      setTimeout(() => {
+        if (chatMessagesRef.current) {
+          chatMessagesRef.current.scrollTo({
+            top: chatMessagesRef.current.scrollHeight,
+            behavior: 'smooth'
+          })
+        }
+      }, 100)
     } catch (error) {
       const errorMsg = `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
       setResponse(errorMsg)
       setChatHistory(prev => [...prev, { question: currentQuestion, response: errorMsg }])
+      
+      // Auto-scroll to bottom with smooth animation
+      setTimeout(() => {
+        if (chatMessagesRef.current) {
+          chatMessagesRef.current.scrollTo({
+            top: chatMessagesRef.current.scrollHeight,
+            behavior: 'smooth'
+          })
+        }
+      }, 100)
     } finally {
       setLoading(false)
     }
@@ -316,16 +337,30 @@ export default function Home() {
                 <p className="text-xs text-purple-100">Ask me anything</p>
               </div>
             </div>
-            <button
-              onClick={() => setIsChatOpen(false)}
-              className="hover:bg-white/20 rounded-full p-2 transition-colors"
-            >
-              ✕
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleLoadData}
+                className="text-xs bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full transition-colors"
+                title="Reload data from digitaltwin.json"
+              >
+                🔄 Reload
+              </button>
+              <button
+                onClick={() => setIsChatOpen(false)}
+                className="hover:bg-white/20 rounded-full p-2 transition-colors"
+              >
+                ✕
+              </button>
+            </div>
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div ref={chatMessagesRef} className="flex-1 overflow-y-auto p-4 space-y-4">
+            {loadStatus && (
+              <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-3 text-sm text-center">
+                {loadStatus}
+              </div>
+            )}
             {chatHistory.length === 0 ? (
               <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
                 <div className="text-4xl mb-4">👋</div>
