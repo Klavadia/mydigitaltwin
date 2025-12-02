@@ -21,14 +21,32 @@ export default function Home() {
     e.preventDefault()
     if (!question.trim()) return
 
-    setLoading(true)
     const currentQuestion = question
     setQuestion('')
+    
+    // Add user message immediately
+    setChatHistory(prev => [...prev, { question: currentQuestion, response: '' }])
+    setLoading(true)
+
+    // Auto-scroll to show user message
+    setTimeout(() => {
+      if (chatMessagesRef.current) {
+        chatMessagesRef.current.scrollTo({
+          top: chatMessagesRef.current.scrollHeight,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
 
     try {
       const result = await digitalTwinQuery(currentQuestion)
       setResponse(result.response)
-      setChatHistory(prev => [...prev, { question: currentQuestion, response: result.response }])
+      // Update the last message with the response
+      setChatHistory(prev => {
+        const updated = [...prev]
+        updated[updated.length - 1] = { question: currentQuestion, response: result.response }
+        return updated
+      })
       
       // Auto-scroll to bottom with smooth animation
       setTimeout(() => {
@@ -42,7 +60,12 @@ export default function Home() {
     } catch (error) {
       const errorMsg = `Error: ${error instanceof Error ? error.message : 'Unknown error'}`
       setResponse(errorMsg)
-      setChatHistory(prev => [...prev, { question: currentQuestion, response: errorMsg }])
+      // Update the last message with error
+      setChatHistory(prev => {
+        const updated = [...prev]
+        updated[updated.length - 1] = { question: currentQuestion, response: errorMsg }
+        return updated
+      })
       
       // Auto-scroll to bottom with smooth animation
       setTimeout(() => {
@@ -601,11 +624,6 @@ export default function Home() {
 
           {/* Chat Messages */}
           <div ref={chatMessagesRef} className="flex-1 overflow-y-auto p-4 space-y-4">
-            {loadStatus && (
-              <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-3 text-sm text-center">
-                {loadStatus}
-              </div>
-            )}
             {chatHistory.length === 0 ? (
               <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
                 <div className="text-4xl mb-4">👋</div>
@@ -637,11 +655,13 @@ export default function Home() {
                     </div>
                   </div>
                   {/* AI Response */}
-                  <div className="flex justify-start">
-                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-2xl rounded-tl-sm px-4 py-2 max-w-[80%] border border-purple-100 dark:border-purple-800/30">
-                      <p className="text-sm whitespace-pre-wrap">{chat.response}</p>
+                  {chat.response && (
+                    <div className="flex justify-start">
+                      <div className="bg-purple-50 dark:bg-purple-900/20 rounded-2xl rounded-tl-sm px-4 py-2 max-w-[80%] border border-purple-100 dark:border-purple-800/30">
+                        <p className="text-sm whitespace-pre-wrap">{chat.response}</p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               ))
             )}
