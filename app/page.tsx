@@ -528,11 +528,43 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-purple-800 to-indigo-800 text-white py-8 sm:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm sm:text-base text-purple-200">
-            © 2024 Karl Lavadia. Powered by Upstash Vector & Groq.
-          </p>
+      <footer className="bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-white py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Powered By Section */}
+          <div className="mb-8">
+            <h3 className="text-center text-sm font-semibold text-purple-300 uppercase tracking-wider mb-6">
+              Powered By
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-all">
+                <h4 className="font-bold text-base mb-1">Next.js 15</h4>
+                <p className="text-xs text-purple-200">React Framework</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-all">
+                <h4 className="font-bold text-base mb-1">Groq</h4>
+                <p className="text-xs text-purple-200">AI Inference</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-all">
+                <h4 className="font-bold text-base mb-1">Upstash Vector</h4>
+                <p className="text-xs text-purple-200">RAG Database</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-all">
+                <h4 className="font-bold text-base mb-1">Vercel</h4>
+                <p className="text-xs text-purple-200">Deployment</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-all sm:col-span-3 md:col-span-1">
+                <h4 className="font-bold text-base mb-1">TypeScript</h4>
+                <p className="text-xs text-purple-200">Type Safety</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Copyright */}
+          <div className="text-center pt-6 border-t border-purple-700/50">
+            <p className="text-sm text-purple-200">
+              © 2024 Karl Lavadia. Powered by Upstash Vector & Groq.
+            </p>
+          </div>
         </div>
       </footer>
 
