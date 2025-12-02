@@ -26,9 +26,6 @@ export default function Home() {
     setQuestion('')
 
     try {
-      // Add 1 second delay before getting response
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
       const result = await digitalTwinQuery(currentQuestion)
       setResponse(result.response)
       setChatHistory(prev => [...prev, { question: currentQuestion, response: result.response }])
