@@ -135,19 +135,29 @@ export default function Home() {
         const transcript = event.results[i][0].transcript
         if (event.results[i].isFinal) {
           fullTranscript += transcript + ' '
+          console.log('Final transcript:', transcript)
         } else {
           interimTranscript = transcript
+          console.log('Interim transcript:', transcript)
         }
       }
       
-      setQuestion(fullTranscript + interimTranscript)
+      const combinedText = fullTranscript + interimTranscript
+      console.log('Setting question to:', combinedText)
+      setQuestion(combinedText)
     }
 
     recognition.onerror = (event: any) => {
+      console.log('Speech recognition error:', event.error)
       if (event.error === 'aborted' || event.error === 'no-speech') {
         // These are normal, don't stop listening
         return
       }
+      if (event.error === 'network') {
+        // Network errors are common, just continue
+        return
+      }
+      console.error('Stopping due to error:', event.error)
       setIsListening(false)
     }
 
@@ -636,7 +646,6 @@ export default function Home() {
             {chatHistory.length === 0 ? (
               <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
                 <div className="text-4xl mb-4">👋</div>
-                <p className="mb-4">Hi! I'm your Digital Twin.</p>
                 <p className="text-sm mb-6">Ask me about experience, skills, or projects!</p>
                 <div className="space-y-2">
                   {[
