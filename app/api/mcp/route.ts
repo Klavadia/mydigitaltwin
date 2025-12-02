@@ -46,9 +46,12 @@ export async function POST(request: NextRequest) {
           id,
         })
 
+      case 'tools/call':
       case 'query':
       case 'digital_twin_query':
-        if (!params?.question) {
+        const question = params?.question || params?.arguments?.question
+        
+        if (!question) {
           return NextResponse.json({
             jsonrpc: '2.0',
             error: {
@@ -59,7 +62,7 @@ export async function POST(request: NextRequest) {
           })
         }
 
-        const result = await digitalTwinQuery(params.question)
+        const result = await digitalTwinQuery(question)
 
         return NextResponse.json({
           jsonrpc: '2.0',
@@ -67,6 +70,7 @@ export async function POST(request: NextRequest) {
           id,
         })
 
+      case 'tools/list':
       case 'list_tools':
         return NextResponse.json({
           jsonrpc: '2.0',
@@ -74,7 +78,7 @@ export async function POST(request: NextRequest) {
             tools: [
               {
                 name: 'digital_twin_query',
-                description: 'Query the digital twin for professional information',
+                description: 'Query the digital twin for professional information about Karl, including work experience, skills, education, and career background',
                 inputSchema: {
                   type: 'object',
                   properties: {
