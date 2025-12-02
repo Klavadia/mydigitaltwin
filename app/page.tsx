@@ -174,13 +174,13 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 dark:from-gray-900 dark:via-purple-950 dark:to-gray-900">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg border-b border-purple-100 dark:border-purple-900/30">
-        <div className="max-w-7xl mx-auto px-8 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+            <h1 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
               Karl Lavadia
             </h1>
-            <div className="flex gap-8">
-              {['home', 'about', 'skills', 'projects'].map((section) => (
+            <div className="hidden md:flex gap-4 lg:gap-8">
+              {['home', 'about', 'skills', 'projects', 'contact'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -190,30 +190,37 @@ export default function Home() {
                 </button>
               ))}
             </div>
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsChatOpen(true)}
+              className="md:hidden bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium"
+            >
+              Chat
+            </button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="text-left">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
+      <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="text-center md:text-left order-2 md:order-1">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
                 Karl Francis L. Lavadia
               </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8">
                 Full-stack developer passionate about building scalable web applications and innovative solutions. Specializing in modern technologies and creating seamless user experiences from front-end to back-end.
               </p>
               <button
                 onClick={() => scrollToSection('about')}
-                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all hover:scale-105 hover:from-purple-600 hover:to-indigo-600"
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-medium hover:shadow-lg transition-all hover:scale-105 hover:from-purple-600 hover:to-indigo-600 text-sm sm:text-base"
               >
                 Learn More
               </button>
             </div>
-            <div className="flex justify-center md:justify-end">
-              <div className="w-[28rem] h-[28rem] overflow-hidden rounded-3xl shadow-2xl ring-4 ring-purple-200 dark:ring-purple-800">
+            <div className="flex justify-center order-1 md:order-2">
+              <div className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] overflow-hidden rounded-3xl shadow-2xl ring-4 ring-purple-200 dark:ring-purple-800">
                 <img
                   src="/profile.webp"
                   alt="Karl Lavadia"
@@ -226,47 +233,47 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-8 py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+      <section id="about" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-white dark:bg-gray-900">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="mb-8 sm:mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
               About Me
             </h2>
             
-            <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl shadow-lg p-8 mb-8 border border-purple-100 dark:border-purple-800/30">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-200 to-indigo-200 dark:from-purple-700 dark:to-indigo-700 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-purple-700 dark:text-purple-200" fill="currentColor" viewBox="0 0 20 20">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 border border-purple-100 dark:border-purple-800/30">
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div className="flex-shrink-0 mx-auto sm:mx-0">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-200 to-indigo-200 dark:from-purple-700 dark:to-indigo-700 flex items-center justify-center">
+                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-purple-700 dark:text-purple-200" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                     </svg>
                   </div>
                 </div>
-                <div className="flex-1 text-left">
-                  <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                <div className="flex-1 text-center sm:text-left">
+                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-3 sm:mb-4 leading-relaxed">
                     I am passionate about technology, web development, and AI innovation. As a BS Information Technology student at St. Paul University Philippines, my goal is to create innovative solutions that bridge the gap between cutting-edge technology and practical, user-friendly applications.
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                     With hands-on experience in Laravel, Filament, and modern JavaScript frameworks, combined with a strong foundation in full-stack development, I build responsive, scalable web applications that solve real-world problems. I'm actively exploring AI/ML integration, having built projects with RAG systems and vector databases.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-6 text-center border border-purple-100 dark:border-purple-800/30">
-                <h3 className="font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Education</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">BSIT-4 at Saint Paul University Philippines</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-4 sm:p-6 text-center border border-purple-100 dark:border-purple-800/30">
+                <h3 className="text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Education</h3>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">BSIT-4 at Saint Paul University Philippines</p>
               </div>
               
-              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-6 text-center border border-purple-100 dark:border-purple-800/30">
-                <h3 className="font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Specialization</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Full-Stack Web Development & AI Integration</p>
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-4 sm:p-6 text-center border border-purple-100 dark:border-purple-800/30">
+                <h3 className="text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Specialization</h3>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Full-Stack Web Development & AI Integration</p>
               </div>
               
-              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-6 text-center border border-purple-100 dark:border-purple-800/30">
-                <h3 className="font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Passion</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Technology, Web Design  & AI Innovation</p>
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-4 sm:p-6 text-center border border-purple-100 dark:border-purple-800/30 sm:col-span-2 md:col-span-1">
+                <h3 className="text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Passion</h3>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Technology, Web Design  & AI Innovation</p>
               </div>
             </div>
           </div>
@@ -274,49 +281,49 @@ export default function Home() {
       </section>
 
       {/* Skills & Expertise Section */}
-      <section id="skills" className="min-h-screen flex items-center justify-center px-8 py-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+      <section id="skills" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="mb-8 sm:mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
               Skills & Expertise
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400">
               Technical proficiencies and domain expertise
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">◆</span>
-                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Frontend Development</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <span className="text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">✦</span>
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Frontend Development</h3>
               </div>
-              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+              <ul className="space-y-1.5 sm:space-y-2 text-sm sm:text-base text-gray-700 dark:text-gray-300">
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> React & Next.js</li>
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> HTML5 & CSS3</li>
-                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> JavaScript frameworks</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> TypeScript & JavaScript</li>
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Responsive design</li>
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Accessibility standards</li>
               </ul>
             </div>
 
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">◆</span>
-                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Backend Development</h3>
+            <div className="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <span className="text-xl sm:text-2xl bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">✦</span>
+                <h3 className="text-base sm:text-lg lg:text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Backend Development</h3>
               </div>
-              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+              <ul className="space-y-1.5 sm:space-y-2 text-sm sm:text-base text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> PHP & Laravel</li>
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Node.js & Express</li>
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> RESTful API design</li>
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Server architecture</li>
                 <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> MVC principles</li>
-                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> PHP & Laravel</li>
               </ul>
             </div>
 
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">◆</span>
+                <span className="text-2xl bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">✦</span>
                 <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Database Management</h3>
               </div>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
@@ -330,7 +337,7 @@ export default function Home() {
 
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">◆</span>
+                <span className="text-2xl bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">✦</span>
                 <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Development Tools</h3>
               </div>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
@@ -344,7 +351,7 @@ export default function Home() {
 
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">◆</span>
+                <span className="text-2xl bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">✦</span>
                 <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">UI/UX Design</h3>
               </div>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
@@ -358,7 +365,7 @@ export default function Home() {
 
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">◆</span>
+                <span className="text-2xl bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">✦</span>
                 <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">AI/ML Development</h3>
               </div>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
@@ -374,49 +381,71 @@ export default function Home() {
       </section>
 
       {/* Featured Projects Section */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-8 py-20 bg-white dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+      <section id="projects" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-white dark:bg-gray-900">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="mb-8 sm:mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
               Featured Projects
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400">
               Showcasing innovative solutions and technical implementations
             </p>
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-6 hover:shadow-lg transition-all">
-              <div className="flex items-start gap-4">
-                <div className="text-4xl">✦</div>
+          <div className="space-y-4 sm:space-y-6">
+            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-4 sm:p-6 hover:shadow-lg transition-all">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="text-2xl sm:text-3xl lg:text-4xl">✦</div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Paulinian Student Council E-Portfolio and Ranking System</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 text-gray-800 dark:text-white">Paulinian Student Council E-Portfolio and Ranking System</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
                     A digital portfolio and performance evaluation platform for student council members. Tracks activities, achievements, and contributions with an intelligent ranking system to recognize outstanding performance and leadership.
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">PHP</span>
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Laravel</span>
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">MySQL</span>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                    <span className="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">PHP</span>
+                    <span className="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Laravel</span>
+                    <span className="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">MySQL</span>
                   </div>
+                  <a 
+                    href="https://github.com/Klavadia/eportfolio" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg hover:from-purple-600 hover:to-indigo-600 transition-all text-xs sm:text-sm font-medium hover:scale-105"
+                  >
+                    View Project
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-6 hover:shadow-lg transition-all">
-              <div className="flex items-start gap-4">
-                <div className="text-4xl">✦</div>
+            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-4 sm:p-6 hover:shadow-lg transition-all">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="text-2xl sm:text-3xl lg:text-4xl">✦</div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Digital Twin</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 text-gray-800 dark:text-white">Digital Twin</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
                     An AI-powered digital twin portfolio website with RAG (Retrieval-Augmented Generation) capabilities. Features semantic search through vector databases, real-time chat interface powered by Groq API, and MCP integration for GitHub Copilot and Claude Desktop.
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Next.js</span>
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">TypeScript</span>
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Upstash Vector</span>
-                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Groq API</span>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                    <span className="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Next.js</span>
+                    <span className="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">TypeScript</span>
+                    <span className="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Upstash Vector</span>
+                    <span className="px-2 sm:px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Groq API</span>
                   </div>
+                  <a 
+                    href="https://mydigitaltwin-olive.vercel.app" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg hover:from-purple-600 hover:to-indigo-600 transition-all text-xs sm:text-sm font-medium hover:scale-105"
+                  >
+                    View Project
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
@@ -424,10 +453,84 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contact Section */}
+      <section id="contact" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="mb-8 sm:mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+              Get In Touch
+            </h2>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400">
+              Let's connect and discuss opportunities
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            {/* Contact Info Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              <a 
+                href="mailto:zkaelnich@gmail.com"
+                className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-4 sm:p-6 hover:shadow-lg transition-all cursor-pointer group"
+              >
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white mb-1">Email</h3>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Get in touch</p>
+                  </div>
+                </div>
+              </a>
+
+              <a 
+                href="https://github.com/Klavadia" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-4 sm:p-6 hover:shadow-lg transition-all cursor-pointer group"
+              >
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white mb-1">GitHub</h3>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">View repositories</p>
+                  </div>
+                </div>
+              </a>
+
+              <a 
+                href="https://www.linkedin.com/in/karl-lavadia-9a6212385" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-4 sm:p-6 hover:shadow-lg transition-all cursor-pointer group"
+              >
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white mb-1">LinkedIn</h3>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Connect with me</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-purple-800 to-indigo-800 text-white py-12">
-        <div className="max-w-6xl mx-auto px-8 text-center">
-          <p className="text-purple-200">
+      <footer className="bg-gradient-to-r from-purple-800 to-indigo-800 text-white py-8 sm:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm sm:text-base text-purple-200">
             © 2024 Karl Lavadia. Powered by Upstash Vector & Groq.
           </p>
         </div>
@@ -447,7 +550,7 @@ export default function Home() {
 
       {/* Chat Modal */}
       {isChatOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 h-[600px] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col border border-purple-200 dark:border-purple-800">
+        <div className="fixed bottom-0 right-0 left-0 sm:bottom-6 sm:right-6 sm:left-auto z-50 w-full sm:w-96 h-[100dvh] sm:h-[600px] bg-white dark:bg-gray-900 sm:rounded-2xl rounded-t-2xl shadow-2xl flex flex-col border border-purple-200 dark:border-purple-800">
           {/* Chat Header */}
           <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white p-4 rounded-t-2xl flex justify-between items-center">
             <div className="flex items-center gap-3">
