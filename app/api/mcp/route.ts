@@ -20,6 +20,22 @@ export async function POST(request: NextRequest) {
 
     // Handle different MCP methods
     switch (method) {
+      case 'initialize':
+        return NextResponse.json({
+          jsonrpc: '2.0',
+          result: {
+            protocolVersion: '2024-11-05',
+            capabilities: {
+              tools: {},
+            },
+            serverInfo: {
+              name: 'Digital Twin MCP Server',
+              version: '1.0.0',
+            },
+          },
+          id,
+        })
+
       case 'ping':
         return NextResponse.json({
           jsonrpc: '2.0',
