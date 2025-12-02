@@ -120,45 +120,54 @@ export default function Home() {
     recognition.continuous = true
     recognition.interimResults = true
     recognition.lang = 'en-US'
+    
+    let fullTranscript = ''
 
     recognition.onstart = () => {
       setIsListening(true)
+      fullTranscript = question // Start with existing text if any
     }
 
     recognition.onresult = (event: any) => {
       let interimTranscript = ''
-      let finalTranscript = ''
       
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcript = event.results[i][0].transcript
         if (event.results[i].isFinal) {
-          finalTranscript += transcript
+          fullTranscript += transcript + ' '
         } else {
-          interimTranscript += transcript
+          interimTranscript = transcript
         }
       }
       
-      setQuestion(finalTranscript || interimTranscript)
+      setQuestion(fullTranscript + interimTranscript)
     }
 
     recognition.onerror = (event: any) => {
-      setIsListening(false)
-      if (event.error === 'no-speech') {
-        // User didn't speak, just reset
-      } else if (event.error === 'network') {
-        // Network error, silence it or show user-friendly message
+      if (event.error === 'aborted' || event.error === 'no-speech') {
+        // These are normal, don't stop listening
+        return
       }
+      setIsListening(false)
     }
 
     recognition.onend = () => {
-      if (isListening) {
-        // Only restart if we're still supposed to be listening
-        recognition.start()
+      // Automatically restart if we're still in listening mode
+      if (recognitionRef.current) {
+        try {
+          recognition.start()
+        } catch (e) {
+          // Silently handle restart errors
+        }
       }
     }
 
     recognitionRef.current = recognition
-    recognition.start()
+    try {
+      recognition.start()
+    } catch (e) {
+      setIsListening(false)
+    }
   }
 
   const stopListening = () => {
