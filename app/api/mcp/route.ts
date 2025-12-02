@@ -47,6 +47,48 @@ export async function POST(request: NextRequest) {
         })
 
       case 'tools/call':
+        const toolName = params?.name
+        const toolArgs = params?.arguments || {}
+        
+        if (toolName === 'digital_twin_query') {
+          const question = toolArgs?.question
+          
+          if (!question) {
+            return NextResponse.json({
+              jsonrpc: '2.0',
+              error: {
+                code: -32602,
+                message: 'Invalid params: question is required',
+              },
+              id,
+            })
+          }
+
+          const result = await digitalTwinQuery(question)
+
+          return NextResponse.json({
+            jsonrpc: '2.0',
+            result: {
+              content: [
+                {
+                  type: 'text',
+                  text: result.response || 'No response available',
+                },
+              ],
+            },
+            id,
+          })
+        }
+
+        return NextResponse.json({
+          jsonrpc: '2.0',
+          error: {
+            code: -32601,
+            message: `Unknown tool: ${toolName}`,
+          },
+          id,
+        })
+
       case 'query':
       case 'digital_twin_query':
         const question = params?.question || params?.arguments?.question
