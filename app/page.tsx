@@ -307,7 +307,7 @@ export default function Home() {
               
               <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-4 sm:p-6 text-center border border-purple-100 dark:border-purple-800/30">
                 <h3 className="text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Specialization</h3>
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Full-Stack Web Development & AI Integration</p>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Full-Stack Web Development</p>
               </div>
               
               <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-4 sm:p-6 text-center border border-purple-100 dark:border-purple-800/30 sm:col-span-2 md:col-span-1">
