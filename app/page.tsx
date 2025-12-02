@@ -13,7 +13,9 @@ export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [chatHistory, setChatHistory] = useState<Array<{question: string, response: string}>>([])
   const [isSetupOpen, setIsSetupOpen] = useState(false)
+  const [isListening, setIsListening] = useState(false)
   const chatMessagesRef = useRef<HTMLDivElement>(null)
+  const recognitionRef = useRef<any>(null)
 
   const handleQuery = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,6 +26,9 @@ export default function Home() {
     setQuestion('')
 
     try {
+      // Add 1 second delay before getting response
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
       const result = await digitalTwinQuery(currentQuestion)
       setResponse(result.response)
       setChatHistory(prev => [...prev, { question: currentQuestion, response: result.response }])
@@ -83,6 +88,67 @@ export default function Home() {
     element?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const startListening = () => {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      alert('Speech recognition is not supported in this browser. Please use Chrome or Edge.')
+      return
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+    const recognition = new SpeechRecognition()
+    
+    recognition.continuous = true
+    recognition.interimResults = true
+    recognition.lang = 'en-US'
+
+    recognition.onstart = () => {
+      setIsListening(true)
+    }
+
+    recognition.onresult = (event: any) => {
+      let interimTranscript = ''
+      let finalTranscript = ''
+      
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript
+        } else {
+          interimTranscript += transcript
+        }
+      }
+      
+      setQuestion(finalTranscript || interimTranscript)
+    }
+
+    recognition.onerror = (event: any) => {
+      setIsListening(false)
+      if (event.error === 'no-speech') {
+        // User didn't speak, just reset
+      } else if (event.error === 'network') {
+        // Network error, silence it or show user-friendly message
+      }
+    }
+
+    recognition.onend = () => {
+      if (isListening) {
+        // Only restart if we're still supposed to be listening
+        recognition.start()
+      }
+    }
+
+    recognitionRef.current = recognition
+    recognition.start()
+  }
+
+  const stopListening = () => {
+    setIsListening(false)
+    if (recognitionRef.current) {
+      recognitionRef.current.stop()
+      recognitionRef.current = null
+    }
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about']
@@ -118,7 +184,7 @@ export default function Home() {
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400 capitalize transition-colors"
+                  className="text-sm font-medium text-gray-600 dark:text-gray-300 capitalize transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500/30 hover:to-indigo-500/30 hover:text-white hover:px-4 hover:py-2 hover:rounded-lg"
                 >
                   {section}
                 </button>
@@ -141,7 +207,7 @@ export default function Home() {
               </p>
               <button
                 onClick={() => scrollToSection('about')}
-                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all hover:scale-105"
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all hover:scale-105 hover:from-purple-600 hover:to-indigo-600"
               >
                 Learn More
               </button>
@@ -162,39 +228,46 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="min-h-screen flex items-center justify-center px-8 py-20 bg-white dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4 flex items-center gap-3">
-              <span className="text-3xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">✦</span>
-              <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">About Me</span>
+          <div className="mb-12 text-center">
+            <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              About Me
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl">
-              AI-powered digital twin system for intelligent interview preparation
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="text-4xl mb-3">🧠</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Vector Search</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Semantic search powered by Upstash Vector database
-              </p>
+            
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl shadow-lg p-8 mb-8 border border-purple-100 dark:border-purple-800/30">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-200 to-indigo-200 dark:from-purple-700 dark:to-indigo-700 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-purple-700 dark:text-purple-200" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                    I am passionate about technology, web development, and AI innovation. As a BS Information Technology student at St. Paul University Philippines, my goal is to create innovative solutions that bridge the gap between cutting-edge technology and practical, user-friendly applications.
+                  </p>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    With hands-on experience in Laravel, Filament, and modern JavaScript frameworks, combined with a strong foundation in full-stack development, I build responsive, scalable web applications that solve real-world problems. I'm actively exploring AI/ML integration, having built projects with RAG systems and vector databases.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="text-4xl mb-3">⚡</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Fast Inference</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Lightning-fast responses with Groq LLM
-              </p>
-            </div>
-
-            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="text-4xl mb-3">🔌</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">MCP Integration</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Seamless AI assistant integration
-              </p>
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-6 text-center border border-purple-100 dark:border-purple-800/30">
+                <h3 className="font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Education</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">BSIT-4 at Saint Paul University Philippines</p>
+              </div>
+              
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-6 text-center border border-purple-100 dark:border-purple-800/30">
+                <h3 className="font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Specialization</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Full-Stack Web Development & AI Integration</p>
+              </div>
+              
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl shadow-md p-6 text-center border border-purple-100 dark:border-purple-800/30">
+                <h3 className="font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">Passion</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Technology, Web Design  & AI Innovation</p>
+              </div>
             </div>
           </div>
         </div>
@@ -203,66 +276,98 @@ export default function Home() {
       {/* Skills & Expertise Section */}
       <section id="skills" className="min-h-screen flex items-center justify-center px-8 py-20">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4 flex items-center gap-3">
-              <span className="text-3xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">✦</span>
-              <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">Skills & Expertise</span>
+          <div className="mb-12 text-center">
+            <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+              Skills & Expertise
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl">
+            <p className="text-lg text-gray-600 dark:text-gray-400">
               Technical proficiencies and domain expertise
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="text-3xl mb-3">💻</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Frontend Development</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                React, Next.js, TypeScript, and modern CSS frameworks
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">React</span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">Next.js</span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">TypeScript</span>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">◆</span>
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Frontend Development</h3>
               </div>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> React & Next.js</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> HTML5 & CSS3</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> JavaScript frameworks</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Responsive design</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Accessibility standards</li>
+              </ul>
             </div>
 
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="text-3xl mb-3">⚙️</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Backend Development</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                Node.js, Express, Python, and RESTful API design
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">Node.js</span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">Python</span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">REST APIs</span>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">◆</span>
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Backend Development</h3>
               </div>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Node.js & Express</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> RESTful API design</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Server architecture</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> MVC principles</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> PHP & Laravel</li>
+              </ul>
             </div>
 
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="text-3xl mb-3">🗄️</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Database Management</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                PostgreSQL, MongoDB, and vector databases
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">PostgreSQL</span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">MongoDB</span>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">◆</span>
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Database Management</h3>
               </div>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> MySQL</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> PostgreSQL</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> MongoDB</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Data structure design</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Query optimization</li>
+              </ul>
             </div>
 
             <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
-              <div className="text-3xl mb-3">🛠️</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Development Tools</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                Git, Docker, CI/CD, and cloud deployment
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">Git</span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">Docker</span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs">Vercel</span>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">◆</span>
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Development Tools</h3>
               </div>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Git version control</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Modern IDEs</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> CI/CD basics</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Vercel & Firebase</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Cloud deployment</li>
+              </ul>
+            </div>
+
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">◆</span>
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">UI/UX Design</h3>
+              </div>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> User experience design</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Visual hierarchy</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Accessibility focus</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Design consistency</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Bootstrap & Tailwind</li>
+              </ul>
+            </div>
+
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-xl border border-purple-100 dark:border-purple-800/30 hover:shadow-lg transition-all">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">◆</span>
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">AI/ML Development</h3>
+              </div>
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> RAG systems</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Vector databases</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> LLM integration</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Groq API</li>
+                <li className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer"><span className="text-purple-600 dark:text-purple-400">✦</span> Upstash Vector</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -271,12 +376,11 @@ export default function Home() {
       {/* Featured Projects Section */}
       <section id="projects" className="min-h-screen flex items-center justify-center px-8 py-20 bg-white dark:bg-gray-900">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-5xl md:text-6xl font-bold mb-4 flex items-center gap-3">
-              <span className="text-3xl bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">✦</span>
-              <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">Featured Projects</span>
+          <div className="mb-12 text-center">
+            <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">
+              Featured Projects
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl">
+            <p className="text-lg text-gray-600 dark:text-gray-400">
               Showcasing innovative solutions and technical implementations
             </p>
           </div>
@@ -294,6 +398,24 @@ export default function Home() {
                     <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">PHP</span>
                     <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Laravel</span>
                     <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">MySQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-100 dark:border-purple-800/30 p-6 hover:shadow-lg transition-all">
+              <div className="flex items-start gap-4">
+                <div className="text-4xl">✦</div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Digital Twin</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    An AI-powered digital twin portfolio website with RAG (Retrieval-Augmented Generation) capabilities. Features semantic search through vector databases, real-time chat interface powered by Groq API, and MCP integration for GitHub Copilot and Claude Desktop.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Next.js</span>
+                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">TypeScript</span>
+                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Upstash Vector</span>
+                    <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-md text-xs border border-purple-200 dark:border-purple-700">Groq API</span>
                   </div>
                 </div>
               </div>
@@ -330,28 +452,19 @@ export default function Home() {
           <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white p-4 rounded-t-2xl flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-xl">
-                🤖
+                👤
               </div>
               <div>
-                <h3 className="font-bold">AI Assistant</h3>
+                <h3 className="font-bold">Karl's Digital Twin</h3>
                 <p className="text-xs text-purple-100">Ask me anything</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleLoadData}
-                className="text-xs bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full transition-colors"
-                title="Reload data from digitaltwin.json"
-              >
-                🔄 Reload
-              </button>
-              <button
-                onClick={() => setIsChatOpen(false)}
-                className="hover:bg-white/20 rounded-full p-2 transition-colors"
-              >
-                ✕
-              </button>
-            </div>
+            <button
+              onClick={() => setIsChatOpen(false)}
+              className="hover:bg-white/20 rounded-full p-2 transition-colors"
+            >
+              ✕
+            </button>
           </div>
 
           {/* Chat Messages */}
@@ -402,11 +515,11 @@ export default function Home() {
             )}
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl rounded-tl-sm px-4 py-3">
+                <div className="bg-purple-50 dark:bg-purple-900/20 rounded-2xl rounded-tl-sm px-4 py-3 border border-purple-100 dark:border-purple-800/30">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-2 h-2 bg-purple-600 dark:bg-purple-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-purple-600 dark:bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="w-2 h-2 bg-purple-600 dark:bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                   </div>
                 </div>
               </div>
@@ -424,6 +537,21 @@ export default function Home() {
                 className="flex-1 p-3 border border-purple-300 dark:border-purple-700 rounded-full bg-purple-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
                 disabled={loading}
               />
+              <button
+                type="button"
+                onClick={isListening ? stopListening : startListening}
+                className={`p-3 rounded-full transition-all ${
+                  isListening 
+                    ? 'bg-red-500 animate-pulse' 
+                    : 'bg-purple-500 hover:bg-purple-600'
+                } text-white`}
+                disabled={loading}
+                title={isListening ? 'Stop recording' : 'Start voice input'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
+                </svg>
+              </button>
               <button
                 type="submit"
                 disabled={loading || !question.trim()}
